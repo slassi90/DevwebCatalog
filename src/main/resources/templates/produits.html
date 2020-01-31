@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Produits</title>
+<link rel="stylessheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+<div>
+<div class="container">
+<form th:action="@{index}" method="get">
+<label>motcle</label>
+<input type="text" name="motcle"/>
+<button class="btn btn-primary">Chercher</button>
+</form>
+</div>
+<h3>testappli</h3>
+
+<div class="container">
+<h3>Liste de produit</h3>
+
+<table class="table">
+<thead>
+<tr>
+<th>id</th>
+<th>designation</th>
+<th>prix</th>
+<th>quantite</th>
+</tr>
+</thead>
+
+<tbody>
+<tr th:each="p:${listproduits}">
+<td th:text="${p.id}"></td>
+<td th:text="${p.designation}"></td>
+<td th:text="${p.prix}"></td>
+<td th:text="${p.quanitite}"></td>	
+<td ><a onclick= "return confirmer (vous etes sur de supprimer)" th:href="@{delete(id=${p.id},page=${pagecourante},size=${size},motCle=${motCle})}">Delete</a></td>
+</tr>
+</tbody>
+</thead>
+</table>
+</div>
+<div>
+<ul class="nav nav-pills">
+<li th:class="${pagecourante}==${status.index} ? 'active':''" th:each="pa,status:${pages}">
+<a th:href="@{index(page=${status.index},size=${size})}" th:text="${status.index}"></a>
+</li>
+	
+</ul>
+</div>
+</div>
+</body>
+</html>
